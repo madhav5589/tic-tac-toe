@@ -2,15 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MatRippleModule, MatGridListModule, MatSnackBarModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatRippleModule, MatGridListModule, MatSnackBarModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent, DialogOverviewExampleDialog } from './app.component';
+import { AppComponent, DialogOverviewExampleDialogComponent } from './app.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +28,6 @@ import { AppComponent, DialogOverviewExampleDialog } from './app.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewExampleDialog]
+  entryComponents: [DialogOverviewExampleDialogComponent]
 })
 export class AppModule { }

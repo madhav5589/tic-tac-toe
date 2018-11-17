@@ -1,14 +1,14 @@
 export class Player {
-	name: string;
-	score: number = 0;
+    name: string;
+    score = 0;
 
-	updateScore(total: number) {
-		this.score += total;
-		return this.score;
-	}
+    updateScore(total: number) {
+        this.score += total;
+        return this.score;
+    }
 }
 
 export class PlayerDetails {
-	index: number;
-	playerName: string;
+    index: number;
+    playerName: string;
 }
