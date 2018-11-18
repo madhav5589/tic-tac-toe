@@ -32,12 +32,12 @@ export class GameService {
     initPlayers() {
         // Player1
         const player1 = new Player();
-        player1.name = 'Player1';
+        player1.name = 'Player 1';
         player1.score = 0;
 
         // Player2
         const player2 = new Player();
-        player2.name = 'Player2';
+        player2.name = 'Player 2';
         player2.score = 0;
 
         this.players.push(player1);
