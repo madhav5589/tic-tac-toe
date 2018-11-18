@@ -1,7 +1,7 @@
 <div mat-dialog-content>
     <p>What's your name?</p>
     <mat-form-field>
-        <input matInput name="playerName" [(ngModel)]="data.playerName" placeholder="Enter player name" cdkFocusInitial required>
+        <input matInput name="playerName" [(ngModel)]="data.playerName" placeholder="Enter player name" cdkFocusInitial maxlength="20" required>
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

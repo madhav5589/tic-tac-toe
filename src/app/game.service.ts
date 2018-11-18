@@ -5,190 +5,89 @@ import { Block } from './block';
 @Injectable()
 export class GameService {
     players = [];
-    turn = 0; // By Default First Player turn is First
+    currentPlayer = 0; // By Default First Player turn is First
     draw = 0;
 
-    blocks = [];
-    freeBlocksRemaining = 9;
+    board: Block[];
+    availableCells = 9;
 
     constructor() {
-        this.initBlocks();
-        this.initPlayers();
+        // this.initBoard();
+        // this.initPlayers();
     }
 
-    initBlocks() {
-        this.blocks = [];
+    initBoard() {
+        this.board = [];
 
         for (let i = 1; i <= 9; ++i) {
-            const block = new Block();
+            const block: Block = {
+                available: true,
+                symbol: ''
+            };
 
-            block.free = true;
-            block.value = '';
-            block.symbol = '';
-
-            this.blocks.push(block);
+            this.board.push(block);
         }
     }
 
     initPlayers() {
         // Player1
         const player1 = new Player();
+        player1.name = 'Player1';
+        player1.score = 0;
 
         // Player2
         const player2 = new Player();
+        player2.name = 'Player2';
+        player2.score = 0;
 
         this.players.push(player1);
         this.players.push(player2);
     }
 
-    changeTurn() {
-        if ( this.turn === 1) {
-            this.turn = 0;
+    updateBlock(index: number) {
+        if (this.currentPlayer === 0) {
+            this.board[index].symbol = 'X';
         } else {
-            this.turn = 1;
+            this.board[index].symbol = 'O';
         }
-        return this.turn;
     }
 
-    blockSetComplete() {
-        const block2 = this.blocks[1];
-        const block1 = this.blocks[0];
-        const block3 = this.blocks[2];
-        const block4 = this.blocks[3];
-        const block5 = this.blocks[4];
-        const block6 = this.blocks[5];
-        const block7 = this.blocks[6];
-        const block8 = this.blocks[7];
-        const block9 = this.blocks[8];
+    changeTurn() {
+        this.currentPlayer = this.currentPlayer === 1 ? 0 : 1;
+        return this.currentPlayer;
+    }
+
+    isAnyWinner() {
+        const block1 = this.board[0];
+        const block2 = this.board[1];
+        const block3 = this.board[2];
+        const block4 = this.board[3];
+        const block5 = this.board[4];
+        const block6 = this.board[5];
+        const block7 = this.board[6];
+        const block8 = this.board[7];
+        const block9 = this.board[8];
 
         if (
-            (block1.free === false && block2.free === false && block3.free === false &&
-                 (block1.value === block2.value) && (block1.value === block3.value)) ||
-            (block1.free === false && block4.free === false && block7.free === false &&
-                 (block1.value === block4.value) && (block1.value === block7.value)) ||
-            (block1.free === false && block5.free === false && block9.free === false &&
-                 (block1.value === block5.value) && (block1.value === block9.value)) ||
-            (block2.free === false && block5.free === false && block8.free === false &&
-                 (block2.value === block5.value) && (block2.value === block8.value)) ||
-            (block3.free === false && block6.free === false && block9.free === false &&
-                 (block3.value === block6.value) && (block3.value === block9.value)) ||
-            (block3.free === false && block5.free === false && block7.free === false &&
-                 (block3.value === block5.value) && (block3.value === block7.value)) ||
-            (block4.free === false && block5.free === false && block6.free === false &&
-                 (block4.value === block5.value) && (block4.value === block6.value)) ||
-            (block7.free === false && block8.free === false && block9.free === false &&
-                 (block7.value === block8.value) && (block7.value === block9.value))) {
+            (block1.available === false && block2.available === false && block3.available === false &&
+                 (block1.symbol === block2.symbol) && (block1.symbol === block3.symbol)) ||
+            (block1.available === false && block4.available === false && block7.available === false &&
+                 (block1.symbol === block4.symbol) && (block1.symbol === block7.symbol)) ||
+            (block1.available === false && block5.available === false && block9.available === false &&
+                 (block1.symbol === block5.symbol) && (block1.symbol === block9.symbol)) ||
+            (block2.available === false && block5.available === false && block8.available === false &&
+                 (block2.symbol === block5.symbol) && (block2.symbol === block8.symbol)) ||
+            (block3.available === false && block6.available === false && block9.available === false &&
+                 (block3.symbol === block6.symbol) && (block3.symbol === block9.symbol)) ||
+            (block3.available === false && block5.available === false && block7.available === false &&
+                 (block3.symbol === block5.symbol) && (block3.symbol === block7.symbol)) ||
+            (block4.available === false && block5.available === false && block6.available === false &&
+                 (block4.symbol === block5.symbol) && (block4.symbol === block6.symbol)) ||
+            (block7.available === false && block8.available === false && block9.available === false &&
+                 (block7.symbol === block8.symbol) && (block7.symbol === block9.symbol))) {
             return true;
         } else {
             return false;
         }
-    }
-
-
-
-
-
-    /*
-        Check if any Block Set is completing
-    */
-    GetCompletingSet() {
-
-        const block1 = this.blocks[0];
-        const block2 = this.blocks[1];
-        const block3 = this.blocks[2];
-        const block4 = this.blocks[3];
-        const block5 = this.blocks[4];
-        const block6 = this.blocks[5];
-        const block7 = this.blocks[6];
-        const block8 = this.blocks[7];
-        const block9 = this.blocks[8];
-
-        // Block#1
-        if ( block1.free === false && block2.free === true && block3.free === false &&
-             ( block1.value === 'cross' && block1.value === block3.value) ) {
-            return 2;
-
-        } else if ( block1.free === false && block2.free === false && block3.free === true &&
-             ( block1.value === 'cross' && block1.value === block2.value) ) {
-            return 3;
-
-        } else if ( block1.free === false && block4.free === true && block7.free === false &&
-             ( block1.value === 'cross' && block1.value === block7.value) ) {
-            return 4;
-
-        } else if ( block1.free === false && block4.free === false && block7.free === true &&
-             ( block1.value === 'cross' && block1.value === block4.value) ) {
-            return 7;
-
-        } else if ( block1.free === false && block5.free === true && block9.free === false &&
-             ( block1.value === 'cross' && block1.value === block9.value) ) {
-            return 5;
-
-        } else if ( block1.free === false && block5.free === false && block9.free === true &&
-             ( block1.value === 'cross' && block1.value === block5.value) ) {
-            return 9;
-
-        // Block#2
-        } else if ( block2.free === false && block3.free === false && block1.free === true &&
-             ( block2.value === 'cross' && block2.value === block3.value) ) {
-            return 1;
-
-        } else if ( block2.free === false && block8.free === false && block5.free === true &&
-             ( block2.value === 'cross' && block2.value === block8.value) ) {
-            return 5;
-
-        } else if ( block2.free === false && block8.free === true && block5.free === false &&
-             ( block2.value === 'cross' && block2.value === block5.value) ) {
-            return 8;
-
-        // Block#3
-        } else if ( block3.free === false && block6.free === true && block9.free === false &&
-             ( block3.value === 'cross' && block3.value === block9.value) ) {
-            return 6;
-
-        } else if ( block3.free === false && block9.free === true && block6.free === false &&
-            ( block3.value === 'cross' && block3.value === block6.value) ) {
-            return 9;
-
-        } else if ( block3.free === false && block5.free === true && block7.free === false &&
-             ( block3.value === 'cross' && block3.value === block7.value) ) {
-            return 5;
-
-        } else if ( block3.free === false && block7.free === true && block5.free === false &&
-             ( block3.value === 'cross' && block3.value === block5.value) ) {
-            return 7;
-
-        // Block#4
-        } else if ( block4.free === false && block5.free === true && block6.free === false &&
-             ( block4.value === 'cross' && block4.value === block6.value) ) {
-            return 5;
-
-        } else if ( block4.free === false && block6.free === true && block5.free === false &&
-             ( block4.value === 'cross' && block4.value === block5.value) ) {
-            return 6;
-
-        // Block#5
-        } else if ( block5.free === false && block4.free === true && block6.free === false &&
-             ( block5.value === 'cross' && block5.value === block6.value) ) {
-            return 4;
-
-        // Block#7
-        } else if ( block7.free === false && block8.free === true && block9.free === false &&
-             ( block7.value === 'cross' && block7.value === block9.value) ) {
-            return 8;
-
-        } else if ( block7.free === false && block9.free === true && block8.free === false &&
-             ( block7.value === 'cross' && block7.value === block8.value) ) {
-            return 9;
-
-        // Block#8
-        } else if ( block8.free === false && block7.free === true && block9.free === false &&
-             ( block8.value === 'cross' && block8.value === block9.value) ) {
-            return 7;
-
-        } else { // If none is applicable
-            return 0;
-        }
-
     }
 }
