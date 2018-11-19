@@ -13,6 +13,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
+## Back-end
+In this repo, I have used service to keep track of players' scores but one can also use [Angular In-memory Web API](https://www.npmjs.com/package/angular-in-memory-web-api).
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
