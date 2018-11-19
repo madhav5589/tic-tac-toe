@@ -6,12 +6,15 @@ import { MatRippleModule, MatGridListModule, MatSnackBarModule } from '@angular/
 import { MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent, DialogOverviewExampleDialogComponent } from './app.component';
+import { AppComponent } from './app.component';
+import { PlayerNameDialogComponent } from '../app/components/player-name-dialog/player-name-dialog.component';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogOverviewExampleDialogComponent
+    BoardComponent,
+    PlayerNameDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +31,6 @@ import { AppComponent, DialogOverviewExampleDialogComponent } from './app.compon
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewExampleDialogComponent]
+  entryComponents: [PlayerNameDialogComponent]
 })
 export class AppModule { }

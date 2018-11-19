@@ -3,28 +3,7 @@
 		<div class="col-md-8">
             <div class="game-area">
                 <div><h1 style="text-align: center">TIC-TAC-TOE</h1></div>
-                <div class="shadow bg-white rounded" style="height: 60px; font-weight: bold; margin-bottom: 5px;">
-                    <span style="float:left; font-size: 20px;">
-                        <a style="overflow-wrap: break-word" href="#" (click)="openDialog(gs.players[0].name, 1)">{{ gs.players[0].name }} </a>
-                        <br>
-                        Wins: {{ gs.players[0].score }}
-                    </span>
-                    <span style="float: right; font-size: 20px;">
-                        <a href="#" (click)="openDialog(gs.players[1].name, 2)">{{gs.players[1].name}}</a>
-                        <br>
-                        Wins: {{ gs.players[1].score }}
-                    </span>
-                </div>
-                <mat-grid-list class="board-grid" style="border: 1px solid" cols="3">
-                    <mat-grid-tile class="cellClass" *ngFor="let block of gs.board; let i = index;" (click)="playerClick(i)">
-                        {{ block.symbol }}
-                    </mat-grid-tile>
-                </mat-grid-list>
-                <div style="margin-top: 10px; align-content: center; margin-left: 140px;">
-                <button mat-flat-button (click)="playAgain()" style="margin-right:10px;" [hidden]="!showPlayAgainButton" color="primary">Play Again</button>
-                <button mat-flat-button (click)="resetGame()" style="margin-right:10px;" [hidden]="showPlayAgainButton" color="accent">Reset</button>
-                <button mat-flat-button (click)="newGame()" color="primary">New Game</button>
-                </div>
+                <game-board></game-board>
 			</div>
 		</div>
 	</div>

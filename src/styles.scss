@@ -14,8 +14,7 @@
 .board-grid {
 
 	div mat-grid-tile {
-		cursor: pointer;
-		
+		cursor: pointer;		
 
 		&:nth-child(2), &:nth-child(5), &:nth-child(8) {
 			border-left: 1px solid #ccc;

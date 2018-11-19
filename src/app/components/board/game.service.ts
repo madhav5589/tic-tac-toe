@@ -1,30 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Player } from './player';
-import { Block } from './block';
+import { Player } from '../../models/player';
+import { Block } from '../../models/block';
 
 @Injectable()
 export class GameService {
     players = [];
     currentPlayer = 0; // By Default First Player turn is First
-    draw = 0;
+    // draw = 0; // we can keep track of draw count
 
     board: Block[];
     availableCells = 9;
 
-    constructor() {
-        // this.initBoard();
-        // this.initPlayers();
-    }
+    constructor() { }
 
     initBoard() {
         this.board = [];
 
-        for (let i = 1; i <= 9; ++i) {
+        for (let i = 0; i < 9; i++) {
             const block: Block = {
+                // initialize all blocks with empty and mark them as available
                 available: true,
                 symbol: ''
             };
-
             this.board.push(block);
         }
     }
@@ -50,6 +47,10 @@ export class GameService {
         } else {
             this.board[index].symbol = 'O';
         }
+    }
+
+    updateScore() {
+        this.players[this.currentPlayer].score += 1;
     }
 
     changeTurn() {
