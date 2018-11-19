@@ -331,12 +331,12 @@ MIT
 
 @angular/material/dialog
 
-@angular/material/grid-list
-
 @angular/material/form-field
 
 @angular/forms
 MIT
+
+@angular/material/grid-list
 
 @angular/http
 MIT
